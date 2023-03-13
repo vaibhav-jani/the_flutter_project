@@ -28,3 +28,13 @@ String getFiquaranaLyrics() {
       "\n  Khamakha hum jeeye na kyu "
       "\n\n";
 }
+
+String getAajDilGustakhHai() {
+  return "\n\n  चल चल शा रा रा रा रे "
+      "\n चल चल शा रा रा रा रे "
+      "\n\n आज दिल गुस्ताख़ है "
+      "\n पानियों पे आग है "
+      "\n धड़कन भी बेताब है "
+      "\n चल चल शारा रारा रे "
+      "\n\n";
+}
