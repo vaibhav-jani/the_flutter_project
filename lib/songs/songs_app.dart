@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:the_flutter_project/songs.dart';
-import 'package:the_flutter_project/theme.dart';
+import 'package:the_flutter_project/songs/songs.dart';
+import 'package:the_flutter_project/quizs/theme.dart';
 
 class TheSongsApp extends StatelessWidget {
   const TheSongsApp({super.key});
