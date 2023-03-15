@@ -21,12 +21,12 @@ class _UserTransactionsState extends State<UserTransactions> {
     Transaction('t2', "Weekly Groceries", 16.53, DateTime.now()),
   ];
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime dateTime) {
     final newTx = Transaction(
       DateTime.now().microsecond.toString(),
       title,
       amount,
-      DateTime.now(),
+      dateTime,
     );
     setState(() {
       _userTransactions.add(newTx);
