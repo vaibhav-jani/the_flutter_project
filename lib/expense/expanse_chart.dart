@@ -25,7 +25,6 @@ class ExpanseChart extends StatelessWidget {
             }
           }
           var weekDayFormat = DateFormat.E().format(weekDay).substring(0, 1);
-          print("Holishit: $weekDayFormat : $totalSum");
           return {'day': weekDayFormat, 'amount': totalSum};
         }
       },
@@ -43,7 +42,6 @@ class ExpanseChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(groupedTransactionValues);
     return Card(
       elevation: 2,
       margin: const EdgeInsets.all(8),
