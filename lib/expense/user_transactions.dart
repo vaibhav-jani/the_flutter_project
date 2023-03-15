@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'expanse_chart.dart';
 import 'models/Transaction.dart';
@@ -15,8 +17,8 @@ class UserTransactions extends StatefulWidget {
 
 class _UserTransactionsState extends State<UserTransactions> {
   final List<Transaction> _userTransactions = [
-    // Transaction('t1', "New Shoes", 69.99, DateTime.now()),
-    // Transaction('t2', "Weekly Groceries", 16.53, DateTime.now()),
+    Transaction('t1', "New Shoes", 69.99, DateTime.now()),
+    Transaction('t2', "Weekly Groceries", 16.53, DateTime.now()),
   ];
 
   void _addNewTransaction(String title, double amount) {
@@ -29,6 +31,13 @@ class _UserTransactionsState extends State<UserTransactions> {
     setState(() {
       _userTransactions.add(newTx);
     });
+  }
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      DateTime target = DateTime.now().subtract(const Duration(days: 7));
+      return tx.date.isAfter(target);
+    }).toList();
   }
 
   @override
@@ -52,7 +61,7 @@ class _UserTransactionsState extends State<UserTransactions> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const ExpanseChart(),
+          ExpanseChart(_recentTransactions),
           TransactionList(_userTransactions),
         ],
       ),

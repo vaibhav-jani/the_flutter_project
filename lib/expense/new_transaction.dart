@@ -33,7 +33,7 @@ class _NewTransactionState extends State<NewTransaction> {
     return Card(
       elevation: 4,
       child: Container(
-        padding: const EdgeInsets.all(2),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[

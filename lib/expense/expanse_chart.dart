@@ -1,16 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:the_flutter_project/expense/chart_bar.dart';
+
+import 'models/Transaction.dart';
 
 class ExpanseChart extends StatelessWidget {
-  const ExpanseChart({super.key});
+  final List<Transaction> _userTransactions;
+
+  const ExpanseChart(this._userTransactions, {super.key});
+
+  List<Map<String, Object>> get groupedTransactionValues {
+    return List.generate(
+      7,
+      (index) {
+        {
+          final weekDay = DateTime.now().subtract(Duration(days: index));
+          double totalSum = 0.0;
+          for (var i = 0; i < _userTransactions.length; i++) {
+            DateTime transactionDay = _userTransactions[i].date;
+            if (transactionDay.day == weekDay.day &&
+                transactionDay.month == weekDay.month &&
+                transactionDay.year == weekDay.year) {
+              totalSum += _userTransactions[i].amount;
+            }
+          }
+          var weekDayFormat = DateFormat.E().format(weekDay).substring(0, 1);
+          print("Holishit: $weekDayFormat : $totalSum");
+          return {'day': weekDayFormat, 'amount': totalSum};
+        }
+      },
+    ).reversed.toList();
+  }
+
+  double get totalSpending {
+    return groupedTransactionValues.fold(
+      0.0,
+      (sum, item) {
+        return sum + (item['amount'] as double);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(groupedTransactionValues);
     return Card(
-      color: Theme.of(context).primaryColor,
-      elevation: 4,
-      child: const SizedBox(
-        width: double.infinity,
-        child: Text("CHART!"),
+      elevation: 2,
+      margin: const EdgeInsets.all(8),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionValues.map(
+            (data) {
+              double amount = data['amount'] as double;
+              double spendingPctOfTotal =
+                  (totalSpending == 0) ? 0 : amount / totalSpending;
+              String label = data['day'] as String;
+              return Flexible(
+                fit: FlexFit.tight,
+                child: Chartbar(
+                  label,
+                  amount,
+                  spendingPctOfTotal,
+                ),
+              );
+            },
+          ).toList(),
+        ),
       ),
     );
   }
