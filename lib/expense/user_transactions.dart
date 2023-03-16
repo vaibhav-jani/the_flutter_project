@@ -17,8 +17,8 @@ class UserTransactions extends StatefulWidget {
 
 class _UserTransactionsState extends State<UserTransactions> {
   final List<Transaction> _userTransactions = [
-    Transaction('t1', "New Shoes", 69.99, DateTime.now()),
-    Transaction('t2', "Weekly Groceries", 16.53, DateTime.now()),
+    //Transaction('t1', "New Shoes", 69.99, DateTime.now()),
+    //Transaction('t2', "Weekly Groceries", 16.53, DateTime.now()),
   ];
 
   void _addNewTransaction(String title, double amount, DateTime dateTime) {
@@ -30,6 +30,12 @@ class _UserTransactionsState extends State<UserTransactions> {
     );
     setState(() {
       _userTransactions.add(newTx);
+    });
+  }
+
+  void _delete(String id) {
+    setState(() {
+      _userTransactions.removeWhere((element) => element.id == id);
     });
   }
 
@@ -57,12 +63,13 @@ class _UserTransactionsState extends State<UserTransactions> {
           )
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           ExpanseChart(_recentTransactions),
-          TransactionList(_userTransactions),
+          TransactionList(_userTransactions, _delete),
         ],
       ),
       floatingActionButton: FloatingActionButton(

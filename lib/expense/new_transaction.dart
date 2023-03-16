@@ -76,7 +76,12 @@ class _NewTransactionState extends State<NewTransaction> {
             Row(
               children: [
                 //const Text('No date chosen !'),
-                Text(DateFormat.yMMMd().format(_pickedDate)),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Text(
+                    "Selected date: ${DateFormat.yMMMd().format(_pickedDate)}",
+                  ),
+                ),
                 TextButton(
                   onPressed: () {
                     _presentDatePicker();
