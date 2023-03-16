@@ -15,21 +15,18 @@ class TransactionList extends StatelessWidget {
     return _userTransactions.isEmpty
         ? getEmptyTransactionsPlaceHolder(context)
         : Container(
-      padding: const EdgeInsets.all(8),
-      child: SizedBox(
-        height: 300,
-        child: ListView.builder(
-          itemBuilder: (context, position) {
-            return getTransactionCard(
-              _delete,
-              _userTransactions.elementAt(position),
-              context,
-            );
-          },
-          itemCount: _userTransactions.length,
-        ),
-      ),
-    );
+            padding: const EdgeInsets.all(8),
+            child: ListView.builder(
+              itemBuilder: (context, position) {
+                return getTransactionCard(
+                  _delete,
+                  _userTransactions.elementAt(position),
+                  context,
+                );
+              },
+              itemCount: _userTransactions.length,
+            ),
+          );
   }
 }
 
@@ -43,10 +40,7 @@ Widget getEmptyTransactionsPlaceHolder(BuildContext context) {
         const Padding(padding: EdgeInsets.all(16)),
         Text(
           "No transactions added yet!",
-          style: Theme
-              .of(context)
-              .textTheme
-              .titleLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const Padding(padding: EdgeInsets.all(16)),
         SizedBox(
@@ -62,8 +56,8 @@ Widget getEmptyTransactionsPlaceHolder(BuildContext context) {
   );
 }
 
-Widget getTransactionCard(Function(String id) delete, Transaction transaction,
-    BuildContext context) {
+Widget getTransactionCard(
+    Function(String id) delete, Transaction transaction, BuildContext context) {
   return Card(
     child: ListTile(
       leading: CircleAvatar(
@@ -77,17 +71,11 @@ Widget getTransactionCard(Function(String id) delete, Transaction transaction,
       ),
       title: Text(
         transaction.title,
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelLarge,
+        style: Theme.of(context).textTheme.labelLarge,
       ),
       subtitle: Text(
         DateFormat.yMMMd().format(transaction.date),
-        style: Theme
-            .of(context)
-            .textTheme
-            .labelSmall,
+        style: Theme.of(context).textTheme.labelSmall,
       ),
       trailing: IconButton(
         icon: const Icon(Icons.delete),

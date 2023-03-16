@@ -17,8 +17,26 @@ class UserTransactions extends StatefulWidget {
 
 class _UserTransactionsState extends State<UserTransactions> {
   final List<Transaction> _userTransactions = [
-    //Transaction('t1', "New Shoes", 69.99, DateTime.now()),
-    //Transaction('t2', "Weekly Groceries", 16.53, DateTime.now()),
+    Transaction('t1', "New Shoes", 10.0, DateTime.now()),
+    Transaction('t2', "Weekly Groceries", 20.0, DateTime.now()),
+    Transaction('t3', "Weekly Groceries", 30.00, DateTime.now()),
+    Transaction('t4', "Weekly Groceries", 40.00, DateTime.now()),
+    Transaction('t5', "Weekly Groceries", 50.00, DateTime.now()),
+    Transaction('t6', "Weekly Groceries", 60.00, DateTime.now()),
+    Transaction('t7', "Weekly Groceries", 70.00, DateTime.now()),
+    Transaction('t8', "Weekly Groceries", 80.00, DateTime.now()),
+    Transaction('t9', "Weekly Groceries", 90.00, DateTime.now()),
+    Transaction('t10', "Weekly Groceries", 100.00, DateTime.now()),
+    Transaction('t11', "Weekly Groceries", 110.00, DateTime.now()),
+    Transaction('t12', "Weekly Groceries", 120.00, DateTime.now()),
+    Transaction('t13', "Weekly Groceries", 130.00, DateTime.now()),
+    Transaction('t14', "Weekly Groceries", 140.00, DateTime.now()),
+    Transaction('t15', "Weekly Groceries", 150.00, DateTime.now()),
+    Transaction('t16', "Weekly Groceries", 160.00, DateTime.now()),
+    Transaction('t17', "Weekly Groceries", 170.00, DateTime.now()),
+    Transaction('t18', "Weekly Groceries", 180.00, DateTime.now()),
+    Transaction('t19', "Weekly Groceries", 190.00, DateTime.now()),
+    Transaction('t20', "Weekly Groceries", 200.00, DateTime.now()),
   ];
 
   void _addNewTransaction(String title, double amount, DateTime dateTime) {
@@ -48,8 +66,7 @@ class _UserTransactionsState extends State<UserTransactions> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    final appBar = AppBar(
         title: const Text(
           "Personal Expanses",
           style: TextStyle(fontFamily: 'Open Sans'),
@@ -61,15 +78,26 @@ class _UserTransactionsState extends State<UserTransactions> {
             },
             icon: const Icon(Icons.add),
           )
-        ],
-      ),
+        ]);
+
+    var padding = MediaQuery.of(context).padding;
+    var screenHeight =
+        MediaQuery.of(context).size.height - padding.top - padding.bottom;
+    var appBarHeight = appBar.preferredSize.height;
+
+    return Scaffold(
+      appBar: appBar,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          ExpanseChart(_recentTransactions),
-          TransactionList(_userTransactions, _delete),
+          SizedBox(
+              height: (screenHeight - appBarHeight) * 0.3,
+              child: ExpanseChart(_recentTransactions)),
+          SizedBox(
+              height: (screenHeight - appBarHeight) * 0.7,
+              child: TransactionList(_userTransactions, _delete)),
         ],
       ),
       floatingActionButton: FloatingActionButton(
