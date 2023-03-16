@@ -64,6 +64,8 @@ class _UserTransactionsState extends State<UserTransactions> {
     }).toList();
   }
 
+  bool _showChart = true;
+
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
@@ -80,25 +82,52 @@ class _UserTransactionsState extends State<UserTransactions> {
           )
         ]);
 
-    var padding = MediaQuery.of(context).padding;
-    var screenHeight =
-        MediaQuery.of(context).size.height - padding.top - padding.bottom;
-    var appBarHeight = appBar.preferredSize.height;
+    final mediaQuery = MediaQuery.of(context);
+    final padding = mediaQuery.padding;
+    final screenHeight = mediaQuery.size.height - padding.top - padding.bottom;
+    final appBarHeight = appBar.preferredSize.height;
+    final availableHeight = (screenHeight - appBarHeight);
+    final isLandScape = mediaQuery.orientation == Orientation.landscape;
+
+    final transactionListWidget = SizedBox(
+        height: availableHeight * 0.7,
+        child: TransactionList(_userTransactions, _delete));
+
+    final expanseChartWidget = SizedBox(
+      height: availableHeight * (isLandScape ? 0.7 : 0.3),
+      child: ExpanseChart(_recentTransactions),
+    );
+
+    final showChartSwitchWidget = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Show Chart"),
+        Switch(
+          value: _showChart,
+          onChanged: (value) {
+            setState(() {
+              _showChart = value;
+            });
+          },
+        )
+      ],
+    );
 
     return Scaffold(
       appBar: appBar,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(
-              height: (screenHeight - appBarHeight) * 0.3,
-              child: ExpanseChart(_recentTransactions)),
-          SizedBox(
-              height: (screenHeight - appBarHeight) * 0.7,
-              child: TransactionList(_userTransactions, _delete)),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            if (isLandScape) showChartSwitchWidget,
+            if (isLandScape)
+              (_showChart) ? expanseChartWidget : transactionListWidget,
+            if (!isLandScape) expanseChartWidget,
+            if (!isLandScape) transactionListWidget
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

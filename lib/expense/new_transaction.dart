@@ -49,56 +49,63 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: const InputDecoration(
-                labelText: "Title",
-              ),
-              controller: _titleController,
-            ),
-            TextField(
-              decoration: const InputDecoration(
-                labelText: "Amount",
-              ),
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (text) {
-                _addTransaction();
-              },
-            ),
-            const Padding(padding: EdgeInsets.all(4)),
-            Row(
-              children: [
-                //const Text('No date chosen !'),
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: Text(
-                    "Selected date: ${DateFormat.yMMMd().format(_pickedDate)}",
-                  ),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 4,
+        child: Container(
+          padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 16,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 10
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: "Title",
                 ),
-                TextButton(
-                  onPressed: () {
-                    _presentDatePicker();
-                  },
-                  child: const Text("Choose Date"),
-                )
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _addTransaction();
-              },
-              child: const Text(
-                "Add Transaction",
+                controller: _titleController,
               ),
-            )
-          ],
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: "Amount",
+                ),
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (text) {
+                  _addTransaction();
+                },
+              ),
+              const Padding(padding: EdgeInsets.all(4)),
+              Row(
+                children: [
+                  //const Text('No date chosen !'),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: Text(
+                      "Selected date: ${DateFormat.yMMMd().format(_pickedDate)}",
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      _presentDatePicker();
+                    },
+                    child: const Text("Choose Date"),
+                  )
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _addTransaction();
+                },
+                child: const Text(
+                  "Add Transaction",
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

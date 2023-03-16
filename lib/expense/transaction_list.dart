@@ -31,33 +31,39 @@ class TransactionList extends StatelessWidget {
 }
 
 Widget getEmptyTransactionsPlaceHolder(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.all(8),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Padding(padding: EdgeInsets.all(16)),
-        Text(
-          "No transactions added yet!",
-          style: Theme.of(context).textTheme.titleLarge,
+  return LayoutBuilder(
+    builder: (context, constrains) {
+      return Padding(
+        padding: EdgeInsets.all(constrains.maxHeight * 0.05),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(constrains.maxHeight * 0.05)),
+            SizedBox(
+              height: constrains.maxHeight * 0.1,
+              child: Text(
+                "No transactions added yet!",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            Padding(padding: EdgeInsets.all(constrains.maxHeight * 0.01)),
+            SizedBox(
+              height: constrains.maxHeight * 0.4,
+              child: Image.asset(
+                "assets/images/waiting.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(padding: EdgeInsets.all(constrains.maxHeight * 0.05)),
+          ],
         ),
-        const Padding(padding: EdgeInsets.all(16)),
-        SizedBox(
-          height: 200,
-          child: Image.asset(
-            "assets/images/waiting.png",
-            fit: BoxFit.cover,
-          ),
-        ),
-        const Padding(padding: EdgeInsets.all(8)),
-      ],
-    ),
+      );
+    },
   );
 }
 
 Widget getTransactionCard(
     Function(String id) delete, Transaction transaction, BuildContext context) {
+  final errorColor = Theme.of(context).colorScheme.error;
   return Card(
     child: ListTile(
       leading: CircleAvatar(
@@ -77,13 +83,27 @@ Widget getTransactionCard(
         DateFormat.yMMMd().format(transaction.date),
         style: Theme.of(context).textTheme.labelSmall,
       ),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete),
-        color: Theme.of(context).colorScheme.error,
-        onPressed: () {
-          delete(transaction.id);
-        },
-      ),
+      trailing: MediaQuery.of(context).size.width > 360
+          ? TextButton.icon(
+              onPressed: () {
+                delete(transaction.id);
+              },
+              icon: Icon(
+                Icons.delete,
+                color: errorColor,
+              ),
+              label: Text(
+                "Delete",
+                style: TextStyle(color: errorColor),
+              ),
+            )
+          : IconButton(
+              icon: const Icon(Icons.delete),
+              color: errorColor,
+              onPressed: () {
+                delete(transaction.id);
+              },
+            ),
     ),
   );
 }
