@@ -1,5 +1,7 @@
 import 'dart:core';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'expanse_chart.dart';
 import 'models/Transaction.dart';
@@ -68,19 +70,36 @@ class _UserTransactionsState extends State<UserTransactions> {
 
   @override
   Widget build(BuildContext context) {
-    final appBar = AppBar(
-        title: const Text(
-          "Personal Expanses",
-          style: TextStyle(fontFamily: 'Open Sans'),
-        ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              _startAddNewTransaction(context);
-            },
-            icon: const Icon(Icons.add),
+    Widget titleWidget = const Text(
+      "Personal Expanses",
+      style: TextStyle(fontFamily: 'Open Sans'),
+    );
+    final PreferredSizeWidget appBar = (Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: titleWidget,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    _startAddNewTransaction(context);
+                  },
+                  child: const Icon(CupertinoIcons.add),
+                )
+              ],
+            ),
           )
-        ]);
+        : AppBar(
+            title: titleWidget,
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {
+                  _startAddNewTransaction(context);
+                },
+                icon: const Icon(Icons.add),
+              )
+            ],
+          )) as PreferredSizeWidget;
 
     final mediaQuery = MediaQuery.of(context);
     final padding = mediaQuery.padding;
@@ -101,8 +120,12 @@ class _UserTransactionsState extends State<UserTransactions> {
     final showChartSwitchWidget = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Show Chart"),
-        Switch(
+        Text(
+          "Show Chart",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Switch.adaptive(
+          activeColor: Theme.of(context).colorScheme.secondary,
           value: _showChart,
           onChanged: (value) {
             setState(() {
@@ -113,10 +136,8 @@ class _UserTransactionsState extends State<UserTransactions> {
       ],
     );
 
-    return Scaffold(
-      appBar: appBar,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: SingleChildScrollView(
+    final bodyWidget = SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,13 +150,29 @@ class _UserTransactionsState extends State<UserTransactions> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _startAddNewTransaction(context);
-        },
-        child: const Icon(Icons.add),
-      ),
     );
+
+    final fabWidget = Platform.isIOS
+        ? Container()
+        : FloatingActionButton(
+            onPressed: () {
+              _startAddNewTransaction(context);
+            },
+            child: const Icon(Icons.add),
+          );
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            navigationBar: appBar as ObstructingPreferredSizeWidget,
+            child: bodyWidget,
+          )
+        : Scaffold(
+            appBar: appBar,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            body: bodyWidget,
+            floatingActionButton: fabWidget,
+          );
   }
 
   void _startAddNewTransaction(BuildContext context) {
