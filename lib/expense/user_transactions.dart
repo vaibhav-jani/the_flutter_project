@@ -17,7 +17,9 @@ class UserTransactions extends StatefulWidget {
   }
 }
 
-class _UserTransactionsState extends State<UserTransactions> {
+class _UserTransactionsState extends State<UserTransactions>
+    with WidgetsBindingObserver {
+
   final List<Transaction> _userTransactions = [
     Transaction('t1', "New Shoes", 10.0, DateTime.now()),
     Transaction('t2', "Weekly Groceries", 20.0, DateTime.now()),
@@ -186,5 +188,25 @@ class _UserTransactionsState extends State<UserTransactions> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    print("applifecycle initState()");
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("applifecycle didChangeAppLifecycleState : ${state.name}");
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    print("applifecycle dispose()");
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
