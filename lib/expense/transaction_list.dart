@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-import 'models/Transaction.dart';
+import 'package:the_flutter_project/expense/transaction_list_item.dart';
+import 'models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> _userTransactions;
@@ -18,10 +17,10 @@ class TransactionList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: ListView.builder(
               itemBuilder: (context, position) {
-                return getTransactionCard(
-                  _delete,
+                return TransactionListItem(
+                  ValueKey(_userTransactions.elementAt(position).id),
                   _userTransactions.elementAt(position),
-                  context,
+                  _delete,
                 );
               },
               itemCount: _userTransactions.length,
@@ -58,52 +57,5 @@ Widget getEmptyTransactionsPlaceHolder(BuildContext context) {
         ),
       );
     },
-  );
-}
-
-Widget getTransactionCard(
-    Function(String id) delete, Transaction transaction, BuildContext context) {
-  final errorColor = Theme.of(context).colorScheme.error;
-  return Card(
-    child: ListTile(
-      leading: CircleAvatar(
-        radius: 30,
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: FittedBox(
-            child: Text('\$${transaction.amount}'),
-          ),
-        ),
-      ),
-      title: Text(
-        transaction.title,
-        style: Theme.of(context).textTheme.labelLarge,
-      ),
-      subtitle: Text(
-        DateFormat.yMMMd().format(transaction.date),
-        style: Theme.of(context).textTheme.labelSmall,
-      ),
-      trailing: MediaQuery.of(context).size.width > 360
-          ? TextButton.icon(
-              onPressed: () {
-                delete(transaction.id);
-              },
-              icon: Icon(
-                Icons.delete,
-                color: errorColor,
-              ),
-              label: Text(
-                "Delete",
-                style: TextStyle(color: errorColor),
-              ),
-            )
-          : IconButton(
-              icon: const Icon(Icons.delete),
-              color: errorColor,
-              onPressed: () {
-                delete(transaction.id);
-              },
-            ),
-    ),
   );
 }

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'expanse_chart.dart';
-import 'models/Transaction.dart';
+import 'models/transaction.dart';
 import 'transaction_list.dart';
 import 'new_transaction.dart';
 

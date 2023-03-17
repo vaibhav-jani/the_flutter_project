@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:the_flutter_project/expense/chart_bar.dart';
 
-import 'models/Transaction.dart';
+import 'models/transaction.dart';
+
+
 
 class ExpanseChart extends StatelessWidget {
   final List<Transaction> _userTransactions;
