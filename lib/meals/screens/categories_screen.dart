@@ -9,7 +9,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text(
           "DeliMeals",
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -17,7 +17,7 @@ class CategoriesScreen extends StatelessWidget {
                 color: Colors.white,
               ),
         ),
-      ),
+      ),*/
       body: _getBody(context),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_flutter_project/meals/screens/meal_detail_screen.dart';
+import 'package:the_flutter_project/meals/screens/tabs_screen.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/categories_screen.dart';
 
@@ -12,7 +13,7 @@ class MealsApp extends StatelessWidget {
       title: "DeliMeals",
       theme: getMealsTheme(),
       routes: {
-        '/': (context) => const CategoriesScreen(),
+        '/': (context) => const TabsScreen(),
         CategoryMealsScreen.routeName: (context) => const CategoryMealsScreen(),
         MealDetailScreen.routeName: (context) => const MealDetailScreen()
       },
@@ -20,7 +21,7 @@ class MealsApp extends StatelessWidget {
         print(settings.name);
       },
       onUnknownRoute: (context) {
-        const CategoriesScreen();
+        const TabsScreen();
       },
     );
   }
