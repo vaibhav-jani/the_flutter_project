@@ -79,16 +79,37 @@ flutter:
     - family: OpenSans
       fonts:
         - asset: assets/fonts/OpenSans-Bold.ttf
-        - asset: assets/fonts/OpenSans-Regular.ttf
           weight: 700
+        - asset: assets/fonts/OpenSans-Regular.ttf
+
 
     - family: Quicksand
       fonts:
         - asset: assets/fonts/Quicksand-Bold.ttf
+          weight: 700
         - asset: assets/fonts/Quicksand-Light.ttf
         - asset: assets/fonts/Quicksand-Medium.ttf
         - asset: assets/fonts/Quicksand-Regular.ttf
           weight: 700
+
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Raleway-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Raleway-Regular.ttf
+
+
+    - family: RobotoCondensed
+      fonts:
+        - asset: assets/fonts/RobotoCondensed-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/RobotoCondensed-Italic.ttf
+          style: italic
+        - asset: assets/fonts/RobotoCondensed-Light.ttf
+          weight: 300
+        - asset: assets/fonts/RobotoCondensed-Regular.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
