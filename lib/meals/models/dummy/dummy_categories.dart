@@ -2,54 +2,54 @@ import 'package:flutter/material.dart';
 import '../categories.dart';
 
 const DUMMY_CATEGORIES = [
-  Category(
-    'c1',
-    'Italian',
-    Colors.purple,
+  MealCategory(
+    id: 'c1',
+    title: 'Italian',
+    color: Colors.purple,
   ),
-  Category(
-    'c2',
-    'Quick & Easy',
-    Colors.red,
+  MealCategory(
+    id: 'c2',
+    title: 'Quick & Easy',
+    color: Colors.red,
   ),
-  Category(
-    'c3',
-    'Hamburgers',
-    Colors.orange,
+  MealCategory(
+    id: 'c3',
+    title: 'Hamburgers',
+    color: Colors.orange,
   ),
-  Category(
-    'c4',
-    'German',
-    Colors.amber,
+  MealCategory(
+    id: 'c4',
+    title: 'German',
+    color: Colors.amber,
   ),
-  Category(
-    'c5',
-    'Light & Lovely',
-    Colors.blue,
+  MealCategory(
+    id: 'c5',
+    title: 'Light & Lovely',
+    color: Colors.blue,
   ),
-  Category(
-    'c6',
-    'Exotic',
-    Colors.green,
+  MealCategory(
+    id: 'c6',
+    title: 'Exotic',
+    color: Colors.green,
   ),
-  Category(
-    'c7',
-    'Breakfast',
-    Colors.lightBlue,
+  MealCategory(
+    id: 'c7',
+    title: 'Breakfast',
+    color: Colors.lightBlue,
   ),
-  Category(
-    'c8',
-    'Asian',
-    Colors.lightGreen,
+  MealCategory(
+    id: 'c8',
+    title: 'Asian',
+    color: Colors.lightGreen,
   ),
-  Category(
-    'c9',
-    'French',
-    Colors.pink,
+  MealCategory(
+    id: 'c9',
+    title: 'French',
+    color: Colors.pink,
   ),
-  Category(
-    'c10',
-    'Summer',
-    Colors.teal,
+  MealCategory(
+    id: 'c10',
+    title: 'Summer',
+    color: Colors.teal,
   ),
 ];

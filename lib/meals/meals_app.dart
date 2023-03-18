@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:the_flutter_project/meals/meals_homepage.dart';
+import 'category_meals_screen.dart';
+import 'categories_screen.dart';
 
 class MealsApp extends StatelessWidget {
+
   const MealsApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "DeliMeals",
       theme: getMealsTheme(),
-      home: const MealsHome(),
+      routes: {
+        '/': (context) => const CategoriesScreen(),
+        CategoryMealsScreen.routeName: (context) => const CategoryMealsScreen()
+      },
     );
   }
 }

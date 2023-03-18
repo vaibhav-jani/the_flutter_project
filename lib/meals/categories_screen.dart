@@ -1,13 +1,28 @@
-import 'package:flutter/cupertino.dart';
-import 'package:the_flutter_project/meals/models/dummy/dummy_categories.dart';
-
+import 'package:flutter/material.dart';
+import 'models/dummy/dummy_categories.dart';
 import 'category_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
+
   const CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "DeliMeals",
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.normal,
+                color: Colors.white,
+              ),
+        ),
+      ),
+      body: _getBody(context),
+    );
+  }
+
+  Widget _getBody(BuildContext context) {
     return GridView(
       padding: const EdgeInsets.all(24),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
