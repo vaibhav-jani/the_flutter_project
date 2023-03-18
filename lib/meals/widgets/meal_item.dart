@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_flutter_project/meals/screens/meal_detail_screen.dart';
 import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
@@ -32,7 +33,12 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  void selectMeal() {}
+  void _selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+        MealDetailScreen.routeName,
+        arguments: _meal
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +50,7 @@ class MealItem extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       child: InkWell(
         onTap: () {
-          selectMeal();
+          _selectMeal(context);
         },
         radius: 16,
         splashColor: Theme.of(context).primaryColor,
