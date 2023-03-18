@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_flutter_project/meals/screens/filters_screen.dart';
 import 'package:the_flutter_project/meals/screens/meal_detail_screen.dart';
 import 'package:the_flutter_project/meals/screens/tabs_screen.dart';
 import 'screens/category_meals_screen.dart';
@@ -15,7 +16,8 @@ class MealsApp extends StatelessWidget {
       routes: {
         '/': (context) => const TabsScreen(),
         CategoryMealsScreen.routeName: (context) => const CategoryMealsScreen(),
-        MealDetailScreen.routeName: (context) => const MealDetailScreen()
+        MealDetailScreen.routeName: (context) => const MealDetailScreen(),
+        FiltersScreen.routeName: (context) => const FiltersScreen(),
       },
       onGenerateRoute: (settings) {
         print(settings.name);
@@ -36,31 +38,28 @@ ThemeData getMealsTheme() {
     ),
     canvasColor: const Color.fromRGBO(255, 254, 229, 1),
     fontFamily: 'Raleway',
-    textTheme: ThemeData
-        .light()
-        .textTheme
-        .copyWith(
-      bodyLarge: const TextStyle(
-        color: Color.fromRGBO(20, 51, 51, 1),
-      ),
-      bodySmall: const TextStyle(
-        color: Color.fromRGBO(20, 51, 51, 1),
-      ),
-      titleLarge: const TextStyle(
-        fontSize: 24,
-        fontFamily: 'RobotoCondensed',
-        fontWeight: FontWeight.bold,
-      ),
-      titleMedium: const TextStyle(
-        fontSize: 22,
-        fontFamily: 'RobotoCondensed',
-        fontWeight: FontWeight.bold,
-      ),
-      titleSmall: const TextStyle(
-        fontSize: 20,
-        fontFamily: 'RobotoCondensed',
-        fontWeight: FontWeight.bold,
-      ),
-    ),
+    textTheme: ThemeData.light().textTheme.copyWith(
+          bodyLarge: const TextStyle(
+            color: Color.fromRGBO(20, 51, 51, 1),
+          ),
+          bodySmall: const TextStyle(
+            color: Color.fromRGBO(20, 51, 51, 1),
+          ),
+          titleLarge: const TextStyle(
+            fontSize: 24,
+            fontFamily: 'RobotoCondensed',
+            fontWeight: FontWeight.bold,
+          ),
+          titleMedium: const TextStyle(
+            fontSize: 22,
+            fontFamily: 'RobotoCondensed',
+            fontWeight: FontWeight.bold,
+          ),
+          titleSmall: const TextStyle(
+            fontSize: 20,
+            fontFamily: 'RobotoCondensed',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
   );
 }
